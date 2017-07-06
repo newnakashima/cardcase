@@ -50,9 +50,13 @@ try:
             print("yもしくはnを入力してください")
         else:
             break
-        
+
+    conditions = [minimum_letter, maximum_letter, sign_letter, number_letter, capital_letter]
+    mapped = map(lambda x: int(x), conditions)
+    cond = list(mapped)
+
     if ok == 'y':
-        length = int_rand(minimum_letter, maximum_letter, 1)
+        length = int_rand(cond[0], cond[1], 1)
         print("y")
     else:
         print("n")
