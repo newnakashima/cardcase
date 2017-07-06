@@ -2,6 +2,9 @@ import sys
 import random
 
 class PassGenerator:
+    """
+    ランダムなパスワードを生成するクラス
+    """
     def int_rand(self, start, end, step):
         random.seed()
         value = random.randrange(start, end+1, step)
@@ -16,6 +19,13 @@ class PassGenerator:
         return value
     
     def genpass(self, minl = 8, maxl = 16, sig = 1, num = 1, cap = 1):
+        """
+        minl: 最小文字数
+        maxl: 最大文字数
+        sig:  記号文字数
+        num:  数字文字数
+        cap:  大文字文字数
+        """
         if minl == maxl:
             length = minl
         else:

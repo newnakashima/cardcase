@@ -1,5 +1,6 @@
 import sys
 from randomPass import PassGenerator
+import getch
 
 def loop_input(message):
     str = ""
@@ -11,7 +12,7 @@ def loop_input(message):
         else:
             return str
 
-try:
+def password():
     argv = sys.argv
     minimum_letter = argv[1] if len(argv) > 1 else ""
     maximum_letter = argv[2] if len(argv) > 2 else ""
@@ -36,6 +37,14 @@ try:
     
     gen = PassGenerator()
     gen.genpass(*cond)
+    print("Press g to generate new one. Other key to exit")
+    i = getch.getch()
+    if i == 'g':
+        password()
+    else:
+        sys.exit()
+try:
+    password()
     
 except KeyboardInterrupt:
     print("終了します")
