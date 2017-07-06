@@ -1,65 +1,52 @@
 import sys
 import random
 
-def int_rand(start, end, step):
-    random.seed()
-    value = random.randrange(start, end, step)
-    return value
-
-def loop_input(message):
-    str = ""
-    while True:
-        str = input(message)
-        if not str.isdigit():
-            print("数字を入力してください")
-            return loop_input(message)
+class PassGenerator:
+    def int_rand(self, start, end, step):
+        random.seed()
+        value = random.randrange(start, end+1, step)
+        return value
+    
+    def sign_rand(self):
+        value = self.int_rand(33, 60, 1)
+        if (value > 47 and value <= 54):
+            value += 10
+        elif (value > 54):
+            value += 36
+        return value
+    
+    def genpass(self, minl = 8, maxl = 16, sig = 1, num = 1, cap = 1):
+        if minl == maxl:
+            length = minl
         else:
-            return str
-
-try:
-    argv = sys.argv
-    minimum_letter = argv[1] if len(argv) > 1 else ""
-    maximum_letter = argv[2] if len(argv) > 2 else ""
-    sign_letter    = argv[3] if len(argv) > 3 else ""
-    number_letter  = argv[4] if len(argv) > 4 else ""
-    capital_letter = argv[5] if len(argv) > 5 else ""
-
-    if minimum_letter == "":
-        minimum_letter = loop_input("最小文字数: ")
-    if maximum_letter == "":
-        maximum_letter = loop_input("最大文字数: ")
-    if sign_letter == "":
-        sign_letter = loop_input("最小記号文字数: ")
-    if number_letter == "":
-        number_letter = loop_input("最小数字文字数: ")
-    if capital_letter == "":
-        capital_letter = loop_input("最小大文字文字数: ")
-
-    ok = ""
-    while True:
-        print("\n\n")
-        print(f"最小文字数:       {minimum_letter}")
-        print(f"最大文字数:       {maximum_letter}")
-        print(f"最小記号文字数:   {sign_letter}")
-        print(f"最小数字文字数:   {number_letter}")
-        print(f"最小大文字文字数: {capital_letter}")
-        print("\n\n")
-        print("以上でよろしいですか?: y/n")
-        ok = input()
-        if ok != 'y' and ok != 'n':
-            print("yもしくはnを入力してください")
-        else:
-            break
-
-    conditions = [minimum_letter, maximum_letter, sign_letter, number_letter, capital_letter]
-    mapped = map(lambda x: int(x), conditions)
-    cond = list(mapped)
-
-    if ok == 'y':
-        length = int_rand(cond[0], cond[1], 1)
-        print("y")
-    else:
-        print("n")
-
-except KeyboardInterrupt:
-    print("終了しました")
+            length = self.int_rand(minl, maxl, 1)
+    
+        s_letters = []
+        for c in range(sig):
+            code = self.sign_rand()
+            s_letters.append(code)
+        n_letters = []
+        for c in range(num):
+            code = self.int_rand(48, 57, 1)
+            n_letters.append(code)
+        c_letters = []
+        for c in range(cap):
+            code = self.int_rand(65, 90, 1)
+            c_letters.append(code)
+    
+        i_letters_list = [s_letters, n_letters, c_letters]
+    
+        letters = []
+        for c in range(length - (sig + num + cap)):
+            code = self.int_rand(97, 122, 1)
+            letters.append(code)
+        
+        for i in i_letters_list: letters.extend(i)
+    
+        string = []
+        for l in letters:
+            string.append(chr(l))
+    
+        random.shuffle(string)
+        result = "".join(string)
+        print(result)
