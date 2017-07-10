@@ -15,7 +15,7 @@ def password():
     cond = list(mapped)
     
     gen = PassGenerator()
-    gen.genpass(*cond)
+    print(gen.genpass(*cond))
     print("Press g to generate new one. Any other key to exit")
     i = getch.getch()
     if i == 'g':

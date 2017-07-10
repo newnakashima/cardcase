@@ -59,4 +59,4 @@ class PassGenerator:
     
         random.shuffle(string)
         result = "".join(string)
-        print(result)
+        return result
