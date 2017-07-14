@@ -1,6 +1,7 @@
 import sys
-from randomPass import PassGenerator
 import getch
+
+from randomPass import PassGenerator
 
 def password():
     argv = sys.argv
@@ -17,11 +18,14 @@ def password():
     gen = PassGenerator()
     print(gen.genpass(*cond))
     print("Press g to generate new one. Any other key to exit")
-    i = getch.getch()
-    if i == 'g':
-        password()
-    else:
-        sys.exit()
+    try:
+        i = getch.getch()
+        if i == 'g':
+            password()
+        else:
+            sys.exit()
+    except KeyboardInterrupt:
+        print("終了します")
 try:
     password()
     
