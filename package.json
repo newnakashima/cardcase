@@ -1,0 +1,28 @@
+{
+  "name": "cardcase",
+  "version": "0.0.1",
+  "description": "simple password generator",
+  "main": "main.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/newnakashima/cardcase.git"
+  },
+  "keywords": [
+    "password"
+  ],
+  "author": "newnakashima",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/newnakashima/cardcase/issues"
+  },
+  "homepage": "https://github.com/newnakashima/cardcase#readme",
+  "dependencies": {
+    "uniq": "^1.0.1"
+  }
+}

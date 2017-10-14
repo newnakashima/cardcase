@@ -22,9 +22,6 @@ class MyHTTPRequestHandler(BaseHTTPRequestHandler):
         gen = PassGenerator()
         self.prop["password"] = gen.genpass()
 
-        # filename = 'index.html'
-        # filecontent = self.readFile(filename)
-        # self.wfile.write(bytes(filecontent, "utf-8"))
         self.write("this is test")
         return
 
