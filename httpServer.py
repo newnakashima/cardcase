@@ -9,7 +9,7 @@ class MyHTTPRequestHandler(BaseHTTPRequestHandler):
         self.send_header('Content-type', 'text/html')
         self.end_headers()
 
-        filename = 'index.html'
+        filename = 'html/index.html'
         filecontent = self.readFile(filename)
         self.wfile.write(bytes(filecontent, "utf-8"))
         return 
@@ -22,10 +22,14 @@ class MyHTTPRequestHandler(BaseHTTPRequestHandler):
         gen = PassGenerator()
         self.prop["password"] = gen.genpass()
 
-        filename = 'index.html'
-        filecontent = self.readFile(filename)
-        self.wfile.write(bytes(filecontent, "utf-8"))
+        # filename = 'index.html'
+        # filecontent = self.readFile(filename)
+        # self.wfile.write(bytes(filecontent, "utf-8"))
+        self.write("this is test")
         return
+
+    def write(self, body):
+        self.wfile.write(bytes(body, "utf-8"))
 
     def readFile(self, filename):
         filecontent = ''
@@ -46,6 +50,7 @@ class MyHTTPRequestHandler(BaseHTTPRequestHandler):
 def run(server_class=HTTPServer, handler_class=MyHTTPRequestHandler):
     try:
         server_address = ('', 8000)
+        print("Serving at localhost:8000")
         httpd = server_class(server_address, handler_class)
         httpd.serve_forever()
     except KeyboardInterrupt:
