@@ -20,9 +20,13 @@ class MyHTTPRequestHandler(BaseHTTPRequestHandler):
         self.end_headers()
 
         gen = PassGenerator()
-        self.prop["password"] = gen.genpass()
+        password = gen.genpass()
+        self.prop["password"] = password
+        filename = 'html/result.html'
+        filecontent = self.readFile(filename)
 
-        self.write("this is test")
+        # self.write(password)
+        self.wfile.write(bytes(filecontent, "utf-8"))
         return
 
     def write(self, body):
